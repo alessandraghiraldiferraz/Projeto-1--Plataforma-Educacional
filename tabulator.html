@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamentos de Plataforma Educacional </title>
+    <link href="https://unpkg.com/tabulator-tables@6.3.1/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.3.1/dist/js/tabulator.min.js"></script>
+    <style>
+        #main {
+            width: 100%;
+            height: 80vh;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #tabela {
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        
+        }
+
+        input {
+            width: 200px;
+            height: 35px;
+            display: block;
+            margin: 10px;
+
+        }
+    </style>
+
+
+
+</head>
+
+
+
+<body>
+
+    <div>
+        <div id="tabela"></div>
+
+        <form>
+            <h3>Insira os dados</h3>
+            <input placeholder="Insira o Nome" type="text" id="Nome" required>
+            <input placeholder="Insira o Sobrenome" type="text" id="Sobrenome" required>
+            <input placeholder="Insira o Serie" type="text" id="Serie" required>
+            <input placeholder="Insira o Materia" type="text" id="Materia" required>
+            <input placeholder="Insira o Assunto" type="text" id="Assunto" required>
+            <input placeholder="Insira o Trabalho" type="text" id="Trabalho" required>
+            <input placeholder="Insira o DiadaApresentacao" type="text" id="DiadaApresentacao" required>
+            <input type="button" value="Inserir" onclick="atualizar()">
+
+
+
+        </form>
+
+
+        <script>
+            var tabledata = JSON.parse(localStorage.getItem("agendamentos")) || [
+
+                {
+                    id: 1,
+                    Nome: 'Adrian',
+                    Sobrenome: 'Gemelgo',
+                    Serie: '6ºA',
+                    Materia: 'Lingua Portuguesa',
+                    Assunto: 'Holocausto dos judeus, entrevista feita pela internet',
+                    Trabalho: 'individual',
+                    DiadaApresentacao: '02/06/2025'
+                },
+                {
+                    id: 2,
+                    Nome: 'Adriano,José Marcus, Caio, Adriele, Jenifer',
+                    Sobrenome: 'Leão, Buasscraz,Augustto,Souza, Teixeira',
+                    Serie: '6ºA',
+                    Materia: 'Lingua Estrangeira',
+                    Assunto: 'Receitas',
+                    Trabalho: 'grupo',
+                    DiadaApresentacao: '09/06/2025'
+                },
+                {
+
+                    id: 3,
+                    Nome: 'Adrisson, João, Cecilia, Joana, Katiana ',
+                    Sobrenome: 'Moreira, Coronel,Matutto,Duarte, Teles',
+                    Serie: '6ºA',
+                    Materia: 'Educação Fisica',
+                    Assunto: 'Fit Dance',
+                    Trabalho: 'grupo',
+                    DiadaApresentacao: '16/06/2025'
+                }
+            ];
+            var table = new Tabulator("#tabela", {
+                height: "300px",
+                layout: "fitColumns",
+                data: tabledata,
+                autoColumns: true,
+                initialSort: [
+                    { column: "Nome", dir: "desc" },
+                ],
+                pagination: "local",
+                paginationSize: 5
+            });
+
+            function atualizar() {
+                let nome = document.getElementById("Nome");
+                let sobrenome = document.getElementById("Sobrenome");
+                let serie = document.getElementById("Serie");
+                let materia = document.getElementById("Materia");
+                let assunto = document.getElementById("Assunto");
+                let trabalho = document.getElementById("Trabalho");
+                let diadaApresentacao = document.getElementById("DiadaApresentacao");
+
+                if (!nome.value || !sobrenome.value || !serie.value || !materia.value || !assunto.value || !trabalho.value || !diadaApresentacao.value) {
+                    alert('Preencha todos os campos');
+                    return;
+                }
+
+                let novoRegistro = {
+                    id: tabledata.length + 1,
+                    Nome: nome.value,
+                    Sobrenome: sobrenome.value,
+                    Serie: serie.value,
+                    Materia: materia.value,
+                    Assunto: assunto.value,
+                    Trabalho: trabalho.value,
+                    DiadaApresentacao: diadaApresentacao.value
+                };
+
+                tabledata.push(novoRegistro);
+                localStorage.setItem("agendamentos", JSON.stringify(tabledata));
+                table.addRow(novoRegistro, true);
+
+                // (Opcional) limpar os campos:
+                nome.value = "";
+                sobrenome.value = "";
+                serie.value = "";
+                materia.value = "";
+                assunto.value = "";
+                trabalho.value = "";
+                diadaApresentacao.value = "";
+
+
+            }
+
+
+
+        </script>
+</body>
+
+</html>
+
+<form>
+    <h3>Insira os dados</h3>
+    <input placeholder="Insira o Nome" type="text" id="Nome" required>
+    <input placeholder="Insira o Sobrenome" type="text" id="Sobrenome" required>
+    <input placeholder="Insira o Serie" type="text" id="Serie" required>
+    <input placeholder="Insira o Materia" type="text" id="Materia" required>
+    <input placeholder="Insira o Assunto" type="text" id="Assunto" required>
+    <input placeholder="Insira o Trabalho" type="text" id="Trabalho" required>
+    <input placeholder="Insira o DiadaApresentacao" type="text" id="DiadaApresentacao" required>
+    <input type="button" value="Inserir" onclick="atualizar()">
+
+
+
+</form>
+
+
+<script>
+    var tabledata = JSON.parse(localStorage.getItem("agendamentos")) || [
+
+        {
+            id: 1,
+            Nome: 'Adrian',
+            Sobrenome: 'Gemelgo',
+            Serie: '6ºA',
+            Materia: 'Lingua Portuguesa',
+            Assunto: 'Holocausto dos judeus, entrevista feita pela internet',
+            Trabalho: 'individual',
+            DiadaApresentacao: '02/06/2025'
+        },
+        {
+            id: 2,
+            Nome: 'Adriano,José Marcus, Caio, Adriele, Jenifer',
+            Sobrenome: 'Leão, Buasscraz,Augustto,Souza, Teixeira',
+            Serie: '6ºA',
+            Materia: 'Lingua Estrangeira',
+            Assunto: 'Receitas',
+            Trabalho: 'grupo',
+            DiadaApresentacao: '09/06/2025'
+        },
+        {
+
+            id: 3,
+            Nome: 'Adrisson, João, Cecilia, Joana, Katiana ',
+            Sobrenome: 'Moreira, Coronel,Matutto,Duarte, Teles',
+            Serie: '6ºA',
+            Materia: 'Educação Fisica',
+            Assunto: 'Fit Dance',
+            Trabalho: 'grupo',
+            DiadaApresentacao: '16/06/2025'
+        }
+    ];
+    var table = new Tabulator("#tabela", {
+        height: "300px",
+        layout: "fitColumns",
+        data: tabledata,
+        autoColumns: true,
+        initialSort: [
+            { column: "Nome", dir: "desc" },
+        ],
+        pagination: "local",
+        paginationSize: 5
+    });
+
+    function atualizar() {
+        let nome = document.getElementById("Nome");
+        let sobrenome = document.getElementById("Sobrenome");
+        let serie = document.getElementById("Serie");
+        let materia = document.getElementById("Materia");
+        let assunto = document.getElementById("Assunto");
+        let trabalho = document.getElementById("Trabalho");
+        let diadaApresentacao = document.getElementById("DiadaApresentacao");
+
+        if (!nome.value || !sobrenome.value || !serie.value || !materia.value || !assunto.value || !trabalho.value || !diadaApresentacao.value) {
+            alert('Preencha todos os campos');
+            return;
+        }
+
+        let novoRegistro = {
+            id: tabledata.length + 1,
+            Nome: nome.value,
+            Sobrenome: sobrenome.value,
+            Serie: serie.value,
+            Materia: materia.value,
+            Assunto: assunto.value,
+            Trabalho: trabalho.value,
+            DiadaApresentacao: diadaApresentacao.value
+        };
+
+        tabledata.push(novoRegistro);
+        localStorage.setItem("agendamentos", JSON.stringify(tabledata));
+        table.addRow(novoRegistro, true);
+
+        // (Opcional) limpar os campos:
+        nome.value = "";
+        sobrenome.value = "";
+        serie.value = "";
+        materia.value = "";
+        assunto.value = "";
+        trabalho.value = "";
+        diadaApresentacao.value = "";
+
+
+    }
+
+
+
+</script>
+</body>
+
+</html>
